@@ -1,0 +1,39 @@
+{% extends "./base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/front.css') }}">
+{% endblock%}
+
+{% block content %}
+
+{% for project in projects %}
+<div class="col-md-6 grid-margin card stretch-card">
+	<div class="card-body">
+		<div class="row">
+		  <div class="col-2">
+		    <img src="../static/themeassets/images/faces/face1.jpg" alt="image" class="rounded-circle">
+		  </div>
+		  <div class="col-7 project-title">
+		    <h4 class="card-title"> {{ project.title }}</h4>
+		  </div>
+		</div>
+		<div class="pt-4">
+		    <p class="card-text">
+		      {{ project.content }}
+		    </p>
+		</div>
+	</div>
+	<div class="card-body">
+	  <hr>
+	  <div class="int-buttons">
+	  <div class="col-2"><a href="#" class="mdi mdi-currency-usd"></a><span class="int-count" >0</span></div>
+	  <div class="col-2"><a href="#" class="mdi mdi-heart-outline"></a><span class="int-count" >0</span></div>
+	  <div class="col-2"><a href="#" class="mdi mdi-comment-outline"></a><span class="int-count" >0</span></div>
+	  <div class="col-2"><a href="#" class="mdi mdi-share-variant-outline"></a></div>
+	  <div class="col-2"><a href="#" class="mdi mdi-bookmark-outline"></a><span class="int-count" >0</span></div>
+	  </div>
+	</div>
+</div>
+{% endfor %}
+
+{% endblock %}
