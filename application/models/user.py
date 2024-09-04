@@ -7,9 +7,10 @@ from .like import Like
 from .bookmark import Bookmark
 from .donation import Donation
 from .comment import Comment
+from flask_login import UserMixin
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     '''Ths is a blueprint for a user object'''
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), nullable=False)
