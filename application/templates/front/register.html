@@ -32,7 +32,7 @@
                 </div>
                 <h4>New here?</h4>
                 <h6 class="font-weight-light">Signing up is easy</h6>
-                <form class="pt-3">
+                <form class="pt-3" method="POST" action="">
                   {{ form.hidden_tag() }}
                   <div class="form-group">
                     {{ form.username(class="form-control form-control-lg", placeholder="Username") }}
@@ -56,7 +56,7 @@
                     {{ form.submit(class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn") }}
 
                   </div>
-                  <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="login.html" class="text-primary">Login</a>
+                  <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="{{ url_for('login_bp.login') }}" class="text-primary">Login</a>
                   </div>
                 </form>
               </div>

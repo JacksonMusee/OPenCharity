@@ -1,0 +1,33 @@
+{% extends "./base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/front.css') }}">
+{% endblock%}
+
+{% block content %}
+<div class="col-9 grid-margin stretch-card">
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Creating New Project</h4>
+    <form class="forms-sample" method="POST", action="">
+    	{{ form.hidden_tag() }}
+      <div class="form-group">
+        {{ form.title(class="form-control", placeholder="Project Title") }}
+      </div>
+      <div class="form-group">
+        {{ form.content(class="form-control", placeholder="Tell us the story...", rows="16") }}
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+    	<div class="input-group-prepend">
+     		<span class="input-group-text">Kshs.</span>
+    	</div>
+        {{ form.target(class="form-control", placeholder="Target amount", type="text") }}
+      	</div>
+      </div>
+      {{ form.submit(class="btn btn-gradient-primary me-2") }}
+    </form>
+  </div>
+</div>
+</div>	
+{% endblock %}

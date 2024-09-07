@@ -7,7 +7,7 @@
 {% block content %}
 
 {% for project in projects %}
-<div class="col-md-6 grid-margin card stretch-card">
+<div class="col-md-9 grid-margin card stretch-card">
 	<div class="card-body">
 		<div class="row">
 		  <div class="col-2">
@@ -17,22 +17,38 @@
 		    <h4 class="card-title"> {{ project.title }}</h4>
 		  </div>
 		</div>
-		<div class="pt-4">
+		<a class="ancher-disable" href="{{ url_for('project_bp.project_details', project_id=project.id) }}">
+			<div class="pt-4">
 		    <p class="card-text">
 		      {{ project.content }}
 		    </p>
-		</div>
+			</div>
+		</a>
 	</div>
 	<div class="card-body">
 	  <hr>
 	  <div class="int-buttons">
-	  <div class="col-2"><a href="#" class="mdi mdi-currency-usd"></a><span class="int-count" >0</span></div>
-	  <div class="col-2"><a href="#" class="mdi mdi-heart-outline"></a><span class="int-count" >0</span></div>
-	  <div class="col-2"><a href="#" class="mdi mdi-comment-outline"></a><span class="int-count" >0</span></div>
+	  <div class="col-2"><a href="#" class="mdi mdi-currency-usd"></a><span class="int-count" >{{ project.donation_count }}</span></div>
+	  <div class="col-2"><a href="#" class="mdi mdi-heart-outline"></a><span class="int-count" >{{ project.like_count }}</span></div>
+	  <div class="col-2"><a href="#" class="mdi mdi-comment-outline" onclick="showForm({{ project.id }}); return false;"></a><span class="int-count" >{{ project.comment_count }}</span></div>
 	  <div class="col-2"><a href="#" class="mdi mdi-share-variant-outline"></a></div>
-	  <div class="col-2"><a href="#" class="mdi mdi-bookmark-outline"></a><span class="int-count" >0</span></div>
+	  <div class="col-2"><a href="#" class="mdi mdi-bookmark-outline"></a><span class="int-count" >{{ project.bookmark_count }}</span></div>
 	  </div>
 	</div>
+
+	<div class="comment-form card-body" id="comment-form-{{ project.id }}" hidden>
+		<div class="comment-form-close">
+			<a href="#" class="ancher-disable" onclick="cancelForm(); return false;"> <span class="mdi mdi-close" ></span></a>
+		</div>
+	<form class="forms-sample" method="POST", action="{{ url_for('interactions_bp.comment_project', project_id=project.id) }}">
+    	{{ comment_form.hidden_tag() }}
+      <div class="form-group">
+        {{ comment_form.content(class="form-control", placeholder="Type comment...", rows="4") }}
+      </div>
+      {{ comment_form.submit(class="btn btn-gradient-primary me-2") }}
+    </form>
+	</div>
+
 </div>
 {% endfor %}
 

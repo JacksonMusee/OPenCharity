@@ -30,8 +30,14 @@ def create_app():
     from application.front.routes.index import index_bp
     from application.front.routes.login import login_bp
     from application.front.routes.register import register_bp
+    from application.front.routes.logout import logout_bp
+    from application.front.routes.project import project_bp
+    from application.front.routes.interactions import interactions_bp
     app.register_blueprint(index_bp)
     app.register_blueprint(login_bp)
     app.register_blueprint(register_bp)
+    app.register_blueprint(logout_bp)
+    app.register_blueprint(project_bp)
+    app.register_blueprint(interactions_bp)
 
     return app

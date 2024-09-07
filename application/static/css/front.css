@@ -2,6 +2,10 @@
 	align-content: center;
 }
 
+.ancher-disable {
+	color: #343a40;
+}
+
 .int-buttons {
 	display: flex;
 	justify-content: center;
@@ -15,10 +19,6 @@
     margin-right: 10%;
 }
 
-.comment-user {
-	
-}
-
 a {
     text-decoration: none;
 }
@@ -26,4 +26,31 @@ a {
 .int-count {
 	font-size: 16px;
 	padding-left: 10%;
+}
+
+.rounded-circle-small {
+    border-radius: 50%; /* Ensures the image is circular */
+    width: 50px; /* Set the width to make the circle smaller */
+    height: 50px; /* Set the height to make the circle smaller */
+    object-fit: cover; /* Ensures the image covers the circle without distortion */
+}
+
+.comment-body {
+	padding-top: 2%;
+	padding-left: 3%;
+}
+
+.comment-user {
+	margin-top: 3%;
+	padding-left: 3%;
+}
+
+.comment-form-close {
+	margin: 1% 2% 1% 1%;
+	display: flex;
+	justify-content: right;
+	align-items: right;
+	font-size: 38px;
+	color: darkred;
+
 }
