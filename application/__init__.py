@@ -2,11 +2,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
+from flask_migrate import Migrate
 
 
 db = SQLAlchemy()
 login_manager = LoginManager()
 bcrypt = Bcrypt()
+migrate = Migrate()
 
 
 def create_app():
@@ -21,6 +23,7 @@ def create_app():
     db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
+    migrate.init_app(app, db)
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -33,11 +36,13 @@ def create_app():
     from application.front.routes.logout import logout_bp
     from application.front.routes.project import project_bp
     from application.front.routes.interactions import interactions_bp
+    from application.front.routes.check_out import check_out
     app.register_blueprint(index_bp)
     app.register_blueprint(login_bp)
     app.register_blueprint(register_bp)
     app.register_blueprint(logout_bp)
     app.register_blueprint(project_bp)
     app.register_blueprint(interactions_bp)
+    app.register_blueprint(check_out)
 
     return app

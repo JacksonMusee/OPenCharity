@@ -7,7 +7,7 @@
 {% block content %}
 
 {% for project in projects %}
-<div class="col-md-9 grid-margin card stretch-card">
+<div class="col-md-9 grid-margin card stretch-card" id="project-{{ project.id }}">
 	<div class="card-body">
 		<div class="row">
 		  <div class="col-2">
@@ -28,15 +28,29 @@
 	<div class="card-body">
 	  <hr>
 	  <div class="int-buttons">
-	  <div class="col-2"><a href="#" class="mdi mdi-currency-usd"></a><span class="int-count" >{{ project.donation_count }}</span></div>
-	  <div class="col-2"><a href="#" class="mdi mdi-heart-outline"></a><span class="int-count" >{{ project.like_count }}</span></div>
-	  <div class="col-2"><a href="#" class="mdi mdi-comment-outline" onclick="showForm({{ project.id }}); return false;"></a><span class="int-count" >{{ project.comment_count }}</span></div>
-	  <div class="col-2"><a href="#" class="mdi mdi-share-variant-outline"></a></div>
-	  <div class="col-2"><a href="#" class="mdi mdi-bookmark-outline"></a><span class="int-count" >{{ project.bookmark_count }}</span></div>
+		  <div class="col-2">
+		  	<a href="#" class="mdi mdi-currency-usd" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ project.id }}"></a>
+		  	<span class="int-count" >{{ project.donation_count }}</span>
+		  </div>
+		  <div class="col-2">
+		  	<a href="#" class="mdi mdi-comment-outline" onclick="showForm({{ project.id }}, ''); return false;"></a>
+		  	<span class="int-count" >{{ project.comment_count }}</span>
+		  </div>
+		  <div class="col-2">
+		  	<a href="{{ url_for('interactions_bp.like_project', project_id=project.id)  }}" class="mdi mdi-heart-outline" ></a>
+		  	<span class="int-count" >{{ project.like_count }}</span>
+		  </div>
+		  <div class="col-2">
+		  	<a href="#" class="mdi mdi-share-variant-outline"></a>
+		  </div>
+		  <div class="col-2">
+		  	<a href="{{ url_for('interactions_bp.bookmark_project', project_id=project.id)  }}" class="mdi mdi-bookmark-outline"></a>
+		  	<span class="int-count" >{{ project.bookmark_count }}</span>
+		  </div>
 	  </div>
 	</div>
 
-	<div class="comment-form card-body" id="comment-form-{{ project.id }}" hidden>
+	<div class="comment-form card-body" id="comment-form-{{ project.id }}-" hidden>
 		<div class="comment-form-close">
 			<a href="#" class="ancher-disable" onclick="cancelForm(); return false;"> <span class="mdi mdi-close" ></span></a>
 		</div>
@@ -48,8 +62,55 @@
       {{ comment_form.submit(class="btn btn-gradient-primary me-2") }}
     </form>
 	</div>
-
 </div>
+<!--Checkout modal -->
+<div class="modal fade" id="staticBackdrop{{ project.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content check-out-pop">
+      <div class="modal-header">
+        <p class="modal-title" id="staticBackdropLabel">You will support: <b>{{ project.title }}</b></p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	<div class="mpesa-logo">
+      		<img src="{{ url_for('static', filename='/images/mpesa.png') }}" width="200" height="80">
+      	</div>
+      	
+	      <form class="forms-sample">
+	        <div class="form-group">
+	          <label for="exampleInputUsername1">Your mpesa No. </label>
+	          <input type="text" class="form-control" placeholder="0782232332">
+	        </div>
+	        <div class="form-group">
+	          <label for="exampleInputEmail1">Amount (KES)</label>
+	          <input type="number" class="form-control" placeholder="Amount" min="10">
+	        </div>
+			    <div class="modal-footer">
+		        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+		        <button type="button" class="btn btn-gradient-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ project.id }}-fail">Check Out</button>
+		      </div>
+	      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End of checkout modal-->
+
+<!--Not accepting payments modal -->
+<div class="modal fade" id="staticBackdrop{{ project.id }}-fail" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-4" id="staticBackdropLabel">Failed</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	<p>Sorry, we are unable to process payments at the moment. Please check again later. Cheers.</p>
+      </div>
+	  </div>
+	</div>
+</div>
+<!--End of checkout modal-->
 {% endfor %}
 
 {% endblock %}

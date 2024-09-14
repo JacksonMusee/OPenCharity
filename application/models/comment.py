@@ -11,6 +11,7 @@ class Comment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     project_id = db.Column(db.Integer, db.ForeignKey("project.id"), nullable=False)
     parent_comment_id = db.Column(db.Integer, db.ForeignKey("comment.id"), nullable=True)
+    comment_count = db.Column(db.Integer, nullable=False, default=0)
     like_count = db.Column(db.Integer, nullable=False, default=0)
 
     # relationships

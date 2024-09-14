@@ -2,6 +2,9 @@
 	align-content: center;
 }
 
+a {
+	color: #86898d;
+}
 .ancher-disable {
 	color: #343a40;
 }
@@ -52,5 +55,16 @@ a {
 	align-items: right;
 	font-size: 38px;
 	color: darkred;
+}
 
+.progress-bar {
+	background-color: #a962ff;
+}
+
+.mpesa-logo {
+	margin: 3%;
+}
+
+.check-out-pop {
+	padding: 3%;
 }

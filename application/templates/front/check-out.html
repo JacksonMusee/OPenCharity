@@ -1,0 +1,29 @@
+{% extends "./base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/front.css') }}">
+{% endblock%}
+
+{% block content %}
+<div class="col-md-6 center grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Your support for:</h4>
+      <p class="card-description">  </p>
+      <form class="forms-sample">
+        <div class="form-group">
+          <label for="exampleInputUsername1">Username</label>
+          <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+        </div>
+        <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+        <button class="btn btn-light">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

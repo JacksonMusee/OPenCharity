@@ -1,5 +1,5 @@
-function showForm(projectId) {
-    var commentForm = document.getElementById('comment-form-' + projectId);
+function showForm(projectId, commentId) {
+    var commentForm = document.getElementById('comment-form-' + projectId + '-' + commentId);
     if (commentForm) {
         commentForm.removeAttribute('hidden');
     }
@@ -11,3 +11,17 @@ function cancelForm() {
         form.setAttribute('hidden', true);
     });
 };
+
+
+function showChildren(parentClass, kidsRoom) {
+    var children = document.querySelectorAll('.' + parentClass);
+
+    var kidsRoom = document.getElementById(kidsRoom);
+    
+    children.forEach(function(child) {
+        kidsRoom.appendChild(child);
+
+        child.removeAttribute('hidden');
+        child.style.paddingLeft = '80px';
+    });
+}
