@@ -1,6 +1,7 @@
 from flask import render_template, Blueprint, url_for
 from application.models.project import Project
 from application.models.bookmark import Bookmark
+from application.models.donation import Donation
 from ..forms.comment_fm import CommentForm
 from flask_login import login_required, current_user
 
@@ -41,7 +42,16 @@ def get_initiatives():
     """Fetch all projects of a user"""
     comment_form = CommentForm()
 
-    user_initiatves = Project.query.filter_by(author_id=current_user.id).order_by(Project.date_created.desc()).all()
-    projects = user_initiatves
+    user_initiatives = Project.query.filter_by(author_id=current_user.id).order_by(Project.date_created.desc()).all()
+    projects = user_initiatives
 
     return render_template("front/index.html", projects=projects, comment_form=comment_form)
+
+
+@index_bp.route("/donations", strict_slashes=False)
+@login_required
+def get_donations():
+    """Fetch all donations of a user"""
+    user_donations = Donation.query.filter_by(user_id=current_user.id).order_by(Donation.transaction_date.desc()).all()
+
+    return render_template("front/my-donations.html", donations=user_donations)
