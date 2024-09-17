@@ -89,13 +89,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{ url_for('index_bp.index', filter='trending') }}">
                 <span class="menu-title">Trending Projects</span>
                 <i class="mdi mdi-fire menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{ url_for('index_bp.get_bookmarks') }}">
                 <span class="menu-title">My Bookmarks</span>
                 <i class="mdi mdi-bookmark-outline menu-icon"></i>
               </a>
@@ -107,15 +107,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{ url_for('index_bp.get_initiatives') }}">
                 <span class="menu-title">My Initiatives</span>
                 <i class="mdi mdi-hand-heart-outline menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span class="menu-title">Wallet</span>
-                <i class="mdi mdi-currency-usd menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
