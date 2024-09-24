@@ -37,7 +37,7 @@ def comment_project(project_id):
             db.session.commit()
             return redirect( url_for("project_bp.project_details", project_id=project_id))
         except Exception as e:
-            db.rollback()
+            db.session.rollback()
             form.errors["general"] = str(e)
 
     return render_template("front/index.html", comment_form=form)
@@ -62,7 +62,7 @@ def comment_comment(project_id, parent_id):
             db.session.commit()
             return redirect( url_for("project_bp.project_details", project_id=project_id, parent_comment_id=parent_id))
         except Exception as e:
-            db.rollback()
+            db.session.rollback()
             form.errors["general"] = str(e)
         return redirect( url_for("project_bp.project_details", project_id=project_id))
 
@@ -132,4 +132,4 @@ def bookmark_project(project_id):
     else:
         flash("Yoh, you already bookmarked this project")
 
-    return redirect(url_for("index_bp.index", _anchor=f"project-{project.id}"))
+    return redirect(url_for("index_bp.index", _anchor=f"project-{project_id}"))
